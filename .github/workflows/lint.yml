@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          export CLANG_VERSION=`ls ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang | sed 's/ *$//g'`
+          echo $CLANG_VERSION
+          ls /usr/local/lib/android/sdk/ndk
+          ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang --version
+          ls -R "${ANDROID_NDK_LATEST_HOME}"
